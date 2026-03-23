@@ -303,10 +303,10 @@ export default function EnhancedManual() {
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-slate-500 max-w-2xl leading-relaxed font-medium">
+            <div className="text-xl md:text-2xl text-slate-500 max-w-2xl leading-relaxed font-medium">
               <ShinyText text="The ultimate ecosystem for nightlife venue management." speed={3} className="text-slate-600 block mb-2 font-bold" />
               สุดยอดคู่มือโครงสร้างแพลตฟอร์ม ครบจบทั้ง User App, Admin Portal, และ Core API.
-            </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mt-12 w-full max-w-lg">
               <a href="#installation" className="px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 text-lg">
