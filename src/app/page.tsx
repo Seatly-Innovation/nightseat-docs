@@ -6,11 +6,14 @@ import {
   Menu, X, Search, Copy, Check, ChevronRight,
   Smartphone, Shield, Cpu, Database, Server,
   Users, Layers, ArrowRight, Code2, FileText,
-  Key, LayoutDashboard, Calendar, Terminal, Briefcase, UserCircle, CreditCard
+  Key, LayoutDashboard, Calendar, Terminal, Briefcase, UserCircle, CreditCard, Rocket
 } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import SpotlightCard from '@/components/reactbits/SpotlightCard';
 import ShinyText from '@/components/reactbits/ShinyText';
+import FaqAccordion from '@/components/FaqAccordion';
+import BrowserMockup from '@/components/BrowserMockup';
+import InteractiveRoadmap from '@/components/InteractiveRoadmap';
 
 // --- MAIN CONFIGURATION ---
 const navGroups = [
@@ -47,6 +50,13 @@ const navGroups = [
     title: "Developers",
     items: [
       { id: 'api-reference', label: 'API Reference' },
+    ]
+  },
+  {
+    title: "Roadmap & FAQ",
+    items: [
+      { id: 'roadmap', label: 'Ecosystem Roadmap' },
+      { id: 'faq', label: 'Frequently Asked Questions' },
     ]
   }
 ];
@@ -321,11 +331,41 @@ export default function EnhancedManual() {
 
         {/* 1. Project Overview */}
         <Section id="overview" title="Project Overview" subtitle="What is NightSeat and why is it built as a monorepo?" icon={LayoutDashboard}>
-          <p className="text-lg mb-10 font-medium">
+          <p className="text-lg mb-10 font-medium leading-relaxed">
             <strong>NightSeat Innovation</strong> คือระดับถัดไปของแพลตฟอร์มการจัดการร้านอาหารและสถานบันเทิง ถูกสร้างแบบ Microservices-inspired (แบ่งส่วนรับผิดชอบหน้าบ้าน-หลังบ้าน) แต่อยู่ภายใน <strong>Monorepo</strong> เดียวกันเพื่อให้ Deploy พร้อมกันจากจุดเดียว
           </p>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <BrowserMockup title="Admin Portal Dashboard" url="seatly-admin.nightseat.app">
+            <div className="h-64 sm:h-80 w-full relative flex items-center justify-center border-t border-slate-200" style={{
+              backgroundImage: 'linear-gradient(45deg, #f8fafc 25%, transparent 25%), linear-gradient(-45deg, #f8fafc 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #f8fafc 75%), linear-gradient(-45deg, transparent 75%, #f8fafc 75%)',
+              backgroundSize: '20px 20px',
+              backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+            }}>
+               
+               <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/50 to-transparent"></div>
+               
+               {/* Floating UI Elements inside Browser Mockup */}
+               <motion.div 
+                 initial={{ y: 20, opacity: 0 }}
+                 whileInView={{ y: 0, opacity: 1 }}
+                 transition={{ delay: 0.2, duration: 0.6 }}
+                 className="relative z-10 bg-white p-5 rounded-2xl shadow-xl border border-slate-200 w-3/4 max-w-sm"
+               >
+                 <div className="flex items-center justify-between mb-4">
+                   <div className="h-4 w-24 bg-slate-200 rounded-md"></div>
+                   <div className="h-6 w-16 bg-blue-100 text-blue-600 rounded-md text-[10px] flex items-center justify-center font-bold">LIVE</div>
+                 </div>
+                 {[1,2,3].map(i => (
+                   <div key={i} className="flex gap-3 mb-3 items-center">
+                     <div className="w-8 h-8 rounded-full bg-slate-100 flex-shrink-0"></div>
+                     <div className="flex-1 h-3 bg-slate-100 rounded-full"></div>
+                   </div>
+                 ))}
+               </motion.div>
+            </div>
+          </BrowserMockup>
+
+          <div className="grid md:grid-cols-2 gap-8 mt-12">
             <FeatureCard 
               icon={Smartphone} 
               title="Customer Experience" 
@@ -648,23 +688,37 @@ export default function EnhancedManual() {
         
         {/* 7. Database  */}
         <Section id="database" title="Database Schema" subtitle="MongoDB relational architecture." icon={Database}>
-           <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12 relative overflow-hidden text-white mt-8 shadow-2xl">
+           <SpotlightCard className="bg-[#0a0f1d] border-slate-800 rounded-3xl p-8 md:p-12 relative overflow-hidden text-white mt-8 shadow-2xl" spotlightColor="rgba(255, 255, 255, 0.05)">
               <div className="absolute -top-10 -right-10 p-8 opacity-[0.03] rotate-12"><Database size={400}/></div>
               <p className="text-slate-400 relative z-10 md:w-3/4 text-[16px] leading-relaxed mb-10 font-medium">
-                MongoDB ถูกใช้งานร่วมกับ <code className="bg-slate-800 px-2 py-1 rounded border border-slate-700 text-sky-300">primitive.ObjectID</code> ในการเชื่อมโยงความสัมพันธ์ของ Document เสมือน Foreign Keys ใน RDBMS
+                MongoDB ถูกใช้งานร่วมกับ <code className="bg-slate-800 px-2 py-1 rounded border border-slate-700 text-sky-400">primitive.ObjectID</code> ในการเชื่อมโยงความสัมพันธ์ของ Document เสมือน Foreign Keys ใน RDBMS
               </p>
               
-              <div className="grid sm:grid-cols-2 gap-4 relative z-10">
+              <div className="grid sm:grid-cols-2 gap-5 relative z-10">
                 {['User Profile (Roles & Setup)', 'Venue (Store Details)', 'Booking Transaction', 'Zone & Table Physical Layer', 'Stripe Subscriptions SaaS'].map((i, index) =>(
-                  <div key={index} className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
-                    <div className="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
-                      <Database size={16} />
+                  <div key={index} className="flex items-center gap-4 bg-white/5 p-5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors backdrop-blur-sm">
+                    <div className="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0 border border-sky-500/30">
+                      <Database size={20} strokeWidth={2.5} />
                     </div>
-                    <span className="text-[15px] font-bold">{i}</span>
+                    <span className="text-[15px] font-bold tracking-wide">{i}</span>
                   </div>
                 ))}
               </div>
-           </div>
+           </SpotlightCard>
+        </Section>
+
+        {/* 8. Roadmap */}
+        <Section id="roadmap" title="Ecosystem Roadmap" subtitle="The future of NightSeat Innovation capabilities and releases." icon={Rocket}>
+          <div className="max-w-3xl pr-4">
+            <InteractiveRoadmap />
+          </div>
+        </Section>
+
+        {/* 9. FAQ */}
+        <Section id="faq" title="Frequently Asked Questions" subtitle="Common architectural and feature questions." icon={FileText}>
+          <div className="mt-8">
+            <FaqAccordion />
+          </div>
         </Section>
 
       </main>
