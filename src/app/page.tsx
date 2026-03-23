@@ -17,6 +17,8 @@ import InteractiveRoadmap from '@/components/InteractiveRoadmap';
 import ScrollProgress from '@/components/ScrollProgress';
 import TechBentoGrid from '@/components/TechBentoGrid';
 import TerminalCodeBlock from '@/components/TerminalCodeBlock';
+import CommandPalette from '@/components/CommandPalette';
+import BackToTop from '@/components/BackToTop';
 
 // --- MAIN CONFIGURATION ---
 const navGroups = [
@@ -230,15 +232,16 @@ export default function EnhancedManual() {
             </div>
           </div>
           
-          <div className="relative mb-2">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search guides..." 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 focus:bg-white transition-all shadow-sm placeholder:text-slate-400"
-            />
+          <div className="relative mb-6">
+            <CommandPalette navGroups={navGroups} />
+          </div>
+
+          <div className="flex items-center gap-2 px-3 py-2 mb-4 bg-emerald-50 rounded-lg border border-emerald-100">
+             <div className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+             </div>
+             <span className="text-[11px] font-bold text-emerald-700 uppercase tracking-wide">All Systems Operational</span>
           </div>
         </div>
 
@@ -628,6 +631,8 @@ export default function EnhancedManual() {
         </Section>
 
       </main>
+      
+      <BackToTop />
     </div>
   );
 }
