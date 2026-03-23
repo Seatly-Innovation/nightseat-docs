@@ -1,18 +1,23 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
 @theme {
-  --color-primary: #0284c7; /* Sky 600 */
-  --color-primary-light: #e0f2fe; /* Sky 100 */
+  --color-primary: #0f172a;
+  --color-primary-light: #f1f5f9;
+  --color-accent: #2563eb;
+  --color-accent-light: #eff6ff;
   --color-surface: #ffffff;
-  --color-background: #f8fafc;
+  --color-background: #fafafa;
   
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-heading: var(--font-outfit), system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
 }
 
 @layer base {
   :root {
-    --background: #f8fafc;
-    --foreground: #0f172a;
+    --background: #fafafa;
+    --foreground: #020617;
+    --ring: #94a3b8;
   }
 }
 
@@ -21,11 +26,17 @@ body {
   background: var(--background);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* Elegant Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -36,4 +47,17 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Reactbits - Gradient Text Animation */
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
