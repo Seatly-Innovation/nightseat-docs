@@ -14,6 +14,9 @@ import ShinyText from '@/components/reactbits/ShinyText';
 import FaqAccordion from '@/components/FaqAccordion';
 import BrowserMockup from '@/components/BrowserMockup';
 import InteractiveRoadmap from '@/components/InteractiveRoadmap';
+import ScrollProgress from '@/components/ScrollProgress';
+import TechBentoGrid from '@/components/TechBentoGrid';
+import TerminalCodeBlock from '@/components/TerminalCodeBlock';
 
 // --- MAIN CONFIGURATION ---
 const navGroups = [
@@ -183,6 +186,7 @@ export default function EnhancedManual() {
 
   return (
     <div className="flex min-h-screen bg-[#fafafa]">
+      <ScrollProgress />
       
       {/* Mobile Top Bar */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white/90 backdrop-blur-lg border-b border-slate-200 z-50 flex items-center justify-between px-5">
@@ -548,78 +552,13 @@ export default function EnhancedManual() {
           </div>
         </Section>
 
-        {/* 4. Tech Stack Tabs */}
+        {/* 4. Tech Stack Layers */}
         <Section id="tech-stack" title="Technology Stack" subtitle="Modern, type-safe tools maximizing developer experience and application speed." icon={Code2}>
-          
-          <div className="border border-slate-200 rounded-3xl overflow-hidden bg-white shadow-sm mt-8">
-            <div className="flex border-b border-slate-200 overflow-x-auto custom-scrollbar bg-slate-50/50">
-              {[
-                { id: 'backend', label: 'Backend API (Go)' },
-                { id: 'frontend', label: 'Frontends (Next.js)' },
-                { id: 'infra', label: 'DevOps / Infra' }
-              ].map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-8 py-5 text-[15px] font-bold whitespace-nowrap transition-colors border-b-2 ${activeTab === tab.id ? 'border-blue-600 text-blue-700 bg-white' : 'border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50'}`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="p-8 md:p-10">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTab}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {activeTab === 'backend' && (
-                    <div className="space-y-6">
-                      <p className="text-[16px] font-medium text-slate-600">The Core API Backend System ถูกเขียนด้วย Go เพื่อประสิทธิภาพสูงในการจัดการ Concurrency จองโต๊ะชนกัน:</p>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {['Go 1.24 (Latest Engine)', 'Fiber v2 (Fastest Web Framework)', 'Official MongoDB Go Driver 1.17', 'Go Redis (redis/v8)', 'golang-jwt/v5 for Authentication', 'Official Stripe Go SDK'].map((item, i) => (
-                          <li key={i} className="flex items-center gap-3 text-[15px] font-semibold text-slate-700 bg-slate-50 px-5 py-4 rounded-xl border border-slate-200">
-                            <Check size={18} strokeWidth={2.5} className="text-emerald-500 shrink-0" /> {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {activeTab === 'frontend' && (
-                    <div className="space-y-6">
-                      <p className="text-[16px] font-medium text-slate-600">Frontend ทั้ง User และ Admin ถูกแบ่งเป็น 2 โปรเจคใน Monorepo แต่อยู่บนเทคโนโลยีเดียวกัน:</p>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {['Next.js 16 (App Router Canary)', 'React 19 & React DOM', 'Tailwind CSS 4.x (Vite based)', 'NextAuth.js v4 (JWT Session)', 'i18next (Multi-language TH/EN/ZH)', 'React DnD (Floor Plan Editor)'].map((item, i) => (
-                          <li key={i} className="flex items-center gap-3 text-[15px] font-semibold text-slate-700 bg-slate-50 px-5 py-4 rounded-xl border border-slate-200">
-                            <Check size={18} strokeWidth={2.5} className="text-emerald-500 shrink-0" /> {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {activeTab === 'infra' && (
-                    <div className="space-y-6">
-                      <p className="text-[16px] font-medium text-slate-600">การนำ Application ขึ้นระบบ หรือจัดการ Development ผ่าน Script ควบคุมทั้งหมด:</p>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {['Docker & Docker Compose', 'Alpine Linux Base Images', 'GitHub Actions CI/CD pipeline', 'Bash setup scripts (run-local.sh)'].map((item, i) => (
-                          <li key={i} className="flex items-center gap-3 text-[15px] font-semibold text-slate-700 bg-slate-50 px-5 py-4 rounded-xl border border-slate-200">
-                            <Check size={18} strokeWidth={2.5} className="text-emerald-500 shrink-0" /> {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
+          <div className="mt-8">
+            <TechBentoGrid />
           </div>
         </Section>
+
 
         {/* 5. Features Depth */}
         <Section id="features" title="Enterprise Features" subtitle="Deep dive into the core features powering the NightSeat platform." icon={LayoutDashboard}>
@@ -643,47 +582,14 @@ export default function EnhancedManual() {
         </Section>
 
         {/* 6. API Reference */}
-        <Section id="api-reference" title="API Reference Matrix" subtitle="The unified API powers both User and Admin applications based on JWT Claims." icon={Server}>
-          <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200 mt-6">
-            <div className="flex items-center gap-3 px-6 py-4 bg-slate-50 border-b border-slate-200">
-              <Key size={18} className="text-slate-500" />
-              <div className="text-[13px] font-mono font-bold text-slate-600">Authorization Format: <span className="bg-white px-2 py-1 border border-slate-200 rounded text-sky-600">Bearer {"<token>"}</span></div>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm whitespace-nowrap">
-                <thead className="bg-white border-b border-slate-200">
-                  <tr>
-                    <th className="px-6 py-4 font-bold text-slate-500 uppercase tracking-widest text-[11px]">Method</th>
-                    <th className="px-6 py-4 font-bold text-slate-500 uppercase tracking-widest text-[11px]">Route Path (/api/v1)</th>
-                    <th className="px-6 py-4 font-bold text-slate-500 uppercase tracking-widest text-[11px]">Role Scope</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  <tr className="hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4"><span className="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-lg font-mono text-[11px] font-bold border border-emerald-200">GET</span></td>
-                    <td className="px-6 py-4 font-mono font-semibold text-slate-700">/venues, /events</td>
-                    <td className="px-6 py-4"><span className="px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full text-[12px] font-bold border border-slate-200">Public</span></td>
-                  </tr>
-                  <tr className="hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4"><span className="px-2.5 py-1 bg-sky-100 text-sky-800 rounded-lg font-mono text-[11px] font-bold border border-sky-200">POST</span></td>
-                    <td className="px-6 py-4 font-mono font-semibold text-slate-700">/bookings</td>
-                    <td className="px-6 py-4"><span className="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-[12px] font-bold border border-blue-200">User / Customer</span></td>
-                  </tr>
-                  <tr className="hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4"><span className="px-2.5 py-1 bg-purple-100 text-purple-800 rounded-lg font-mono text-[11px] font-bold border border-purple-200">PATCH</span></td>
-                    <td className="px-6 py-4 font-mono font-semibold text-slate-700">/admin/bookings/:id/status</td>
-                    <td className="px-6 py-4"><span className="px-3 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-[12px] font-bold border border-indigo-200">Staff / Manager</span></td>
-                  </tr>
-                  <tr className="hover:bg-slate-50 transition-colors">
-                    <td className="px-6 py-4"><span className="px-2.5 py-1 bg-rose-100 text-rose-800 rounded-lg font-mono text-[11px] font-bold border border-rose-200">DELETE</span></td>
-                    <td className="px-6 py-4 font-mono font-semibold text-slate-700">/owner/staff/:id</td>
-                    <td className="px-6 py-4"><span className="px-3 py-1.5 bg-rose-100 text-rose-700 rounded-full text-[12px] font-bold border border-rose-200">Owner / SuperAdmin</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        <Section id="api-reference" title="Unified API Interfaces" subtitle="RESTful endpoints mapped via JWT role claims." icon={Server}>
+           <p className="text-[16px] text-slate-600 mb-8 font-medium leading-relaxed">
+             NightSeat handles authentication identically across all platforms via standard `Bearer` tokens. Let's create a booking payload:
+           </p>
+           
+           <div className="mt-8">
+             <TerminalCodeBlock />
+           </div>
         </Section>
         
         {/* 7. Database  */}
