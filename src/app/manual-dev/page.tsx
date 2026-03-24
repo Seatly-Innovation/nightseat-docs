@@ -1,9 +1,10 @@
 "use client";
 
 import DocsLayout from '@/components/DocsLayout';
-import { Section, CodeBlock } from '@/components/DocsShared';
+import { Section } from '@/components/DocsShared';
 import PageNavigation from '@/components/PageNavigation';
 import SpotlightCard from '@/components/reactbits/SpotlightCard';
+import CommandSimulator from '@/components/CommandSimulator';
 import { Terminal } from 'lucide-react';
 
 export default function ManualDev() {
@@ -16,13 +17,10 @@ export default function ManualDev() {
             <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 text-sm font-bold">1</span> 
             Clone & Initialize Ecosystem
           </h3>
-          <p className="text-slate-600 mb-6 font-medium text-[16px]">
-            เรามี Shell Script อัตโนมัติ (<code className="bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded text-sm font-mono">run-local.sh</code>) ที่จะตรวจสอบ Dependencies บนเครื่องของคุณ สร้างไฟล์ <code>.env</code> ของทั้ง 3 โปรเจคแยกกันให้ และสั่ง <code>docker-compose up -d</code> ทันที
+          <p className="text-slate-600 mb-8 font-medium text-[16px]">
+            เรามี Shell Script อัตโนมัติ (<code className="bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded text-sm font-mono">run-local.sh</code>) ที่จะตรวจสอบ Dependencies บนเครื่องของคุณ สร้างไฟล์ <code>.env</code> ของทั้ง 3 โปรเจคแยกกันให้ และสั่ง <code>docker-compose up -d</code> ทันที ดูการจำลองการรันสคริปต์ได้จาก Terminal ด้านล่าง
           </p>
-          <CodeBlock 
-            title="Terminal - Execute Setup Script"
-            code="git clone https://github.com/Seatly-Innovation/Nightseat-Innovation.git\ncd Nightseat-Innovation\nchmod +x run-local.sh\n./run-local.sh" 
-          />
+          <CommandSimulator />
         </SpotlightCard>
 
         <SpotlightCard className="p-8 md:p-10 rounded-3xl" spotlightColor="rgba(37, 99, 235, 0.05)">

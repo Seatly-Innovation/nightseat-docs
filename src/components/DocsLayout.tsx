@@ -8,6 +8,7 @@ import { Menu, X, Search, ChevronRight } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import CommandPalette from "./CommandPalette";
 import BackToTop from "./BackToTop";
+import DynamicIsland from "./DynamicIsland";
 import { navGroups } from "@/lib/navConfig";
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
@@ -117,6 +118,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-[960px] px-6 py-28 lg:px-20 lg:py-32 w-full relative">
+        <DynamicIsland onOpenSidebar={() => setSidebarOpen(true)} />
         <div className="absolute top-0 right-0 w-full h-[600px] bg-gradient-to-b from-blue-50/20 via-white to-transparent -z-10 pointer-events-none"></div>
         <AnimatePresence mode="wait">
           <motion.div
